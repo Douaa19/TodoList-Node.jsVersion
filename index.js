@@ -1,10 +1,21 @@
 const http = require('http');
 const mysql = require('mysql');
+const url = require('url'); 
+
 
 const server = http.createServer((req, res) => {
-    console.log(req.headers);
-    res.end('<html><body><h1>Hello wolrd !</h1></body></html>');
-}).listen(3000, 200);
+    const url = req.url;
+    if (url === '/about') {
+        res.write('Welcome to about page');
+        res.end();
+    } else if (url === '/contact') {
+        res.write('Welcome to contact us page');
+        res.end();
+    }else {
+        res.write('Hello World !');
+        res.end();
+    }
+}).listen(3000);
 
 const con = mysql.createConnection({
     host: 'localhost',
@@ -17,3 +28,4 @@ con.connect((err) => {
     if (err) throw err;
     console.log('Connected !');
 });
+
