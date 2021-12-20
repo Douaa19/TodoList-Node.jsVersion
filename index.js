@@ -1,21 +1,30 @@
 const http = require('http');
 const mysql = require('mysql');
 const url = require('url'); 
+const fs = require('fs');
 
-
+consolenst = hostname = '127.0.0.1';
+const port = 3000;
+// Create a server object
 const server = http.createServer((req, res) => {
-    const url = req.url;
-    if (url === '/about') {
-        res.write('Welcome to about page');
-        res.end();
-    } else if (url === '/contact') {
-        res.write('Welcome to contact us page');
-        res.end();
-    }else {
-        res.write('Hello World !');
-        res.end();
+    if(req.url.endsWith('.html')) {
+        const htmlFile = req.url.slice(1);
+        fs.stat(`./${htmlFile}`, (err, stats) => {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'text/html');
+            if(stats) {
+                fs.createReadStream(htmlFile).pipe(res);
+            } else {
+                res.statusCode = 404;
+                res.end('Sorry, page not found');
+            }
+        });
     }
-}).listen(3000);
+});
+
+server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+});
 
 const con = mysql.createConnection({
     host: 'localhost',
