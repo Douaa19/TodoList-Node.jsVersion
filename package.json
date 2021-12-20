@@ -1,0 +1,22 @@
+{
+  "name": "todolist-node.jsversion",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Douaa19/TodoList-Node.jsVersion.git"
+  },
+  "author": "douaa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Douaa19/TodoList-Node.jsVersion/issues"
+  },
+  "homepage": "https://github.com/Douaa19/TodoList-Node.jsVersion#readme",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
+}
