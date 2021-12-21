@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Douaa19/TodoList-Node.jsVersion#readme",
   "dependencies": {
+    "ejs": "^3.1.6",
     "mysql": "^2.18.1"
   }
 }

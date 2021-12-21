@@ -5,8 +5,11 @@ const fs = require('fs');
 
 consolenst = hostname = '127.0.0.1';
 const port = 3000;
+
+
 // Create a server object
 const server = http.createServer((req, res) => {
+
     if(req.url.endsWith('.html')) {
         const htmlFile = req.url.slice(1);
         fs.stat(`./${htmlFile}`, (err, stats) => {
@@ -23,7 +26,7 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+    console.log(`http://${hostname}:${port}`);
 });
 
 const con = mysql.createConnection({
