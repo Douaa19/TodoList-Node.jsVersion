@@ -1,7 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const mysql = require('mysql');
-
+const ejs = require('ejs');
 
 const hostName = 'localhost';
 const port = 3000;
@@ -48,30 +48,26 @@ server.listen(port, hostName, () => {
     console.log(`Listening for requests http://${hostName}:${port}`);
 });
 
-const con = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password : '',
-    database : 'nodetest'
-});
 
-con.connect((err) => {
-    if (err) throw err;
-    console.log('Connected !');
-});
 
-// Select all from table and show it using foreach loop
-const allData = con.query('SELECT * FROM authors', (err, rows) => {
-    if(err) throw err;
-    rows.forEach((row) => {
-        console.log(`${row.name} lives in ${row.city}`);
-    });
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Delete one sepecefid row using id
-con.query(
-    'DELETE FROM authors WHERE id = ?', [2], (err, result) => {
-        if(err) throw err;
-        console.log(`Deleted ${result.affectedRows} row(s)`);
-    }
-);
+// con.query(
+//     'DELETE FROM authors WHERE id = ?', [2], (err, result) => {
+//         if(err) throw err;
+//         console.log(`Deleted ${result.affectedRows} row(s)`);
+//     }
+// );
