@@ -1,33 +1,47 @@
 const http = require('http');
-const mysql = require('mysql');
-const url = require('url'); 
 const fs = require('fs');
+const mysql = require('mysql');
 
 
 const hostName = 'localhost';
 const port = 3000;
 
 const server = http.createServer((req, res) => {
+    console.log(req.url, req.method);
 
     res.setHeader('Content-Type', 'text/html');
-    
-    
-    
-    if (req.url.endsWith('.html')) {
-        const dir = req.url.slice(1, 7);
-        const nameFile = req.url.slice(7);
 
-        fs.stat(`../${dir}${nameFile}`, (err, stats) => {
+    let path = '../views/';
+    switch(req.url) {
+        case '/':
+            path += 'index.ejs';
             res.statusCode = 200;
-            res.setHeader('Content-Type', 'text/html');
-            if (stats) {
-                fs.createReadStream(`../${dir}${nameFile}`).pipe(res);
-            } else {
-                res.statusCode = 404;
-                res.end('Sorry, this path does not found');
-            }
-        })
+            break;
+        case '/about':
+            path += 'about.ejs';
+            res.statusCode = 200;
+            break;
+        // Redirect page
+        case '/about-us':
+            res.statusCode = 301;
+            res.setHeader('Location', '/about');
+            res.end();
+            break;
+        default:
+            path += '404.ejs';
+            res.statusCode = 404;
+            break;
     }
+    
+    fs.readFile(path, (err, data) => {
+        if (err) {
+            console.log(err);
+            res.end();
+        } else {
+            // res.write(data);
+            res.end(data);
+        }
+    })
 });
 
 server.listen(port, hostName, () => {
@@ -43,5 +57,7 @@ const con = mysql.createConnection({
 
 con.connect((err) => {
     if (err) throw err;
-    // console.log('Connected !');
+    console.log('Connected !');
 });
+
+
