@@ -2,6 +2,9 @@ const http = require('http');
 const fs = require('fs');
 const mysql = require('mysql');
 const ejs = require('ejs');
+const getProjects = require('../models/project');
+
+console.log(getProjects);
 
 const hostName = 'localhost';
 const port = 3000;
