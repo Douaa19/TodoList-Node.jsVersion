@@ -68,4 +68,10 @@ const allData = con.query('SELECT * FROM authors', (err, rows) => {
     });
 });
 
-
+// Delete one sepecefid row using id
+con.query(
+    'DELETE FROM authors WHERE id = ?', [2], (err, result) => {
+        if(err) throw err;
+        console.log(`Deleted ${result.affectedRows} row(s)`);
+    }
+);
