@@ -60,4 +60,12 @@ con.connect((err) => {
     console.log('Connected !');
 });
 
+// Select all from table and show it using foreach loop
+const allData = con.query('SELECT * FROM authors', (err, rows) => {
+    if(err) throw err;
+    rows.forEach((row) => {
+        console.log(`${row.name} lives in ${row.city}`);
+    });
+});
+
 
