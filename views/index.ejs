@@ -22,6 +22,15 @@
         
     </nav>
 
+    <div class="container">
+        <% for(let project of projects) { %>
+            <p><%= project.id_project %> </p>
+            <p><%= project.title %> </p>
+            <p><%= project.description %> </p>
+        <% } %>
+
+    </div>
+
     <div class="blogs content">
         <h2>All Blogs</h2>
     </div>

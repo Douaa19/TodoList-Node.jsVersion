@@ -2,16 +2,24 @@
 const {con} = require('./connection');
 
 
-// Select all from table and show it using foreach loop
-const querySelect = 'SELECT * FROM projects';
-const getProjects = con.query(querySelect, (err, rows) => {
-    if(err) throw err;
-    else {
-        return rows;
-    }
-});
-
-module.exports = {
-    getProjects,
+let getProjects = (callback) => {
+    
+    con.query('SELECT * FROM projects', function(err, res, fields) {
+        if(err) throw err;
+        let projects = [];
+        res.forEach(row => {
+            projects.push( {
+                id_project: row.id_project,
+                title: row.title,
+                description: row.description
+            }); 
+        });
+        callback(projects);
+    });
+    
 }
+
+
+
+module.exports = getProjects
 
