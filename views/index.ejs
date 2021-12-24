@@ -35,16 +35,16 @@
                 <% for(let project of projects) { %>
                 <tr>    
                     <td><%= project.title %></td>
-                    <td><%= project.id_project %></td>
+                    <td><%= project.description %></td>
                     <td>
-                        <form action="" method="post">
-                            <input type="text" name="id_project" id="id_project" value="<%= project.id %>">
+                        <form action="../index.js" method="post">
+                            <input type="hidden" name="id_project" id="id_project" value=<%= project.id_project %>>
                             <button type="submit" class="btn btn-danger" style="color:red; border: 1px solid red; border-radius:3px; padding: 0.5rem 1rem; cursor: pointer;">Delete</button>
                         </form>
                     </td>
                     <td>
                         <form action="" method="post">
-                            <input type="text" name="id_project" id="id_project" value="<%= project.id %>">
+                            <input type="hidden" name="id_project" id="id_project" value=<%= project.id_project %>>
                             <button type="submit" class="btn btn-seccess" style="color:green; border: 1px solid green; border-radius:3px; padding: 0.5rem 1rem; cursor: pointer;">Edit</button>
                         </form>
                     </td>
