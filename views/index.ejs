@@ -8,7 +8,8 @@
     <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 <body>
-    
+
+<header>
     <nav>
         <div class="site-title">
             <a href="/"><h1>Blog Node.js</h1></a>
@@ -21,19 +22,37 @@
         </ul>
         
     </nav>
-
-    <div class="container">
-        <% for(let project of projects) { %>
-            <p><%= project.id_project %> </p>
-            <p><%= project.title %> </p>
-            <p><%= project.description %> </p>
-        <% } %>
-
-    </div>
-
-    <div class="blogs content">
-        <h2>All Blogs</h2>
-    </div>
+</header>
+    
+    <main>
+        <div class="container">
+            <table>
+                <tr>
+                    <th>Project title</th>
+                    <th>Project description</th>
+                    <th>Actions</th>
+                </tr>
+                <% for(let project of projects) { %>
+                <tr>    
+                    <td><%= project.title %></td>
+                    <td><%= project.id_project %></td>
+                    <td>
+                        <form action="" method="post">
+                            <input type="text" name="id_project" id="id_project" value="<%= project.id %>">
+                            <button type="submit" class="btn btn-danger" style="color:red; border: 1px solid red; border-radius:3px; padding: 0.5rem 1rem; cursor: pointer;">Delete</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="post">
+                            <input type="text" name="id_project" id="id_project" value="<%= project.id %>">
+                            <button type="submit" class="btn btn-seccess" style="color:green; border: 1px solid green; border-radius:3px; padding: 0.5rem 1rem; cursor: pointer;">Edit</button>
+                        </form>
+                    </td>
+                </tr>    
+                <% } %>
+            </table>
+        </div>
+    </main>
 
 </body>
 </html>

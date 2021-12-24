@@ -6,12 +6,8 @@ const ejs = require('ejs');
 const getProjects = require('./models/project');
 
 
-getProjects((projects) => {
-    console.log(projects);
-});
-// getProjects.getProjects(function(err, result) {
-//     // TODO: Error handling.
-//     console.log(result);
+// getProjects((projects) => {
+//     console.log(projects);
 // });
 
 const hostName = 'localhost';
@@ -54,15 +50,6 @@ const server = http.createServer((req, res) => {
             break;
     }
     
-    // fs.readFile(path, (err, data) => {
-    //     if (err) {
-    //         console.log(err);
-    //         res.end();
-    //     } else {
-    //         // res.write(data);
-    //         res.end(data);
-    //     }
-    // })
 });
 
 server.listen(port, hostName, () => {
