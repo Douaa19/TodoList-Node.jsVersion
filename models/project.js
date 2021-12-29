@@ -21,5 +21,6 @@ let getProjects = (callback) => {
 
 
 
-module.exports = getProjects
+module.exports = getProjects;
+
 

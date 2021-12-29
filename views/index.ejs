@@ -4,55 +4,82 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <title>Node.js</title>
     <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 <body>
 
 <header>
-    <nav>
-        <div class="site-title">
-            <a href="/"><h1>Blog Node.js</h1></a>
-            <p>A net Node.js site</p>
+    <div class="jumbotron bg-light">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="/"><h1>Todo Node.js</h1></a>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link active" href="/">Home</a>
+                        <a class="nav-item nav-link" href="/about">About</a>
+                        <a class="nav-item nav-link" href="/contact">Contact</a>
+                    </div>
+                </div>
+            </nav>
         </div>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-        </ul>
-        
-    </nav>
+    </div>
 </header>
     
     <main>
         <div class="container">
-            <table>
-                <tr>
-                    <th>Project title</th>
-                    <th>Project description</th>
-                    <th>Actions</th>
-                </tr>
+            <form class="mt-3">
+                <h3>Add project  <i class="fa fa-plus-square"></i></h3>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Email address</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title project">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Description</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Description project" rows="3"></textarea>
+                </div>
+                <div class="form-group mt-1">
+                    <button type="button" class="btn btn-outline-primary">Add</button>
+                </div>
+            </form>
+
+            <table class="table mt-4 table-striped">
+                <thead class="bg-black text-light">
+                    <tr>
+                        <th scope="col">Project title</th>
+                        <th scope="col">Project description</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
                 <% for(let project of projects) { %>
-                <tr>    
-                    <td><%= project.title %></td>
-                    <td><%= project.description %></td>
-                    <td>
-                        <form action="../index.js" method="post">
-                            <input type="hidden" name="id_project" id="id_project" value=<%= project.id_project %>>
-                            <button type="submit" class="btn btn-danger" style="color:red; border: 1px solid red; border-radius:3px; padding: 0.5rem 1rem; cursor: pointer;">Delete</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="" method="post">
-                            <input type="hidden" name="id_project" id="id_project" value=<%= project.id_project %>>
-                            <button type="submit" class="btn btn-seccess" style="color:green; border: 1px solid green; border-radius:3px; padding: 0.5rem 1rem; cursor: pointer;">Edit</button>
-                        </form>
-                    </td>
-                </tr>    
+                    <tr>
+                        <td><%= project.title %></td>
+                        <td><%= project.description %></td>
+                        <td>
+                            <form action="../index.js" method="post">
+                                <input type="hidden" name="id_project" id="id_project" value=<%= project.id_project %>>
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            </form>
+                            <form action="" method="post">
+                                <input type="hidden" name="id_project" id="id_project" value=<%= project.id_project %>>
+                                <button type="submit" class="btn btn-outline-success">Edit</button>
+                            </form>
+                        </td>
+                    </tr>
                 <% } %>
+                </tbody>
             </table>
         </div>
     </main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
 
 </body>
 </html>

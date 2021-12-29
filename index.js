@@ -27,8 +27,6 @@ const server = http.createServer((req, res) => {
                 let ejsContent = ejs.render(ejsFile, {projects: projects})
                 res.end(ejsContent);
             });
-            
-            
             break;
         case '/about':
             page = 'about.ejs';
