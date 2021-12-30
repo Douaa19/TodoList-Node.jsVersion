@@ -14,7 +14,7 @@ const hostName = 'localhost';
 const port = 3000;
 
 const server = http.createServer((req, res) => {
-    console.log(req.url, req.method);
+    // console.log(req.url, req.method);
 
     res.setHeader('Content-Type', 'text/html');
     let page= '';
@@ -28,7 +28,7 @@ const server = http.createServer((req, res) => {
                 res.end(ejsContent);
             });
             break;
-        case '/about':
+        case 'about':
             page = 'about.ejs';
             res.statusCode = 200;
             break;

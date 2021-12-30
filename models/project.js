@@ -19,8 +19,4 @@ let getProjects = (callback) => {
     
 }
 
-
-
 module.exports = getProjects;
-
-
