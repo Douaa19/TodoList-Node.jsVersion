@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql');
 const ejs = require('ejs');
+const route = require('url');
 const getProjects = require('./models/project');
 
 
@@ -14,7 +15,10 @@ const hostName = 'localhost';
 const port = 3000;
 
 const server = http.createServer((req, res) => {
-    // console.log(req.url, req.method);
+    console.log(req.url, req.method);
+    const pt = route.parse(req.url, true);
+    const query = pt.query;
+    console.log(query);
 
     res.setHeader('Content-Type', 'text/html');
     let page= '';
@@ -53,22 +57,6 @@ const server = http.createServer((req, res) => {
 server.listen(port, hostName, () => {
     console.log(`Listening for requests http://${hostName}:${port}`);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Delete one sepecefid row using id
 // con.query(

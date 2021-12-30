@@ -60,16 +60,16 @@
                     <tr>
                         <td><%= project.title %></td>
                         <td><%= project.description %></td>
-                        <td class="row">
-                            <form action="../index.js" method="post" class="col-4">
+                        <td>
+                            <form action="" method="get">
                                 <input type="hidden" name="id_project" id="id_project" value=<%= project.id_project %>>
                                 <button type="submit" class="btn btn-outline-danger">Delete</button>
                             </form>
-                            <form action="" method="post" class="col-4">
+                            <form action="" method="get">
                                 <input type="hidden" name="id_project" id="id_project" value=<%= project.id_project %>>
                                 <button type="submit" class="btn btn-outline-success">Edit</button>
                             </form>
-                            <form action="/project/" method="get" class="col-4">
+                            <form action="http://localhost:3000/info" method="get">
                                 <input type="hidden" name="id_project" id="id_project" value=<%= project.id_project %>>
                                 <button type="submit" class="btn btn-outline-primary">Show</button>
                             </form>
