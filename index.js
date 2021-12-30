@@ -5,8 +5,11 @@ const pt = require('path');
 const mysql = require('mysql');
 const ejs = require('ejs');
 const getProjects = require('./models/project');
+const getTasks = require('./models/task');
 const port = 8000;
 const host = 'localhost';
+
+console.log(getTasks());
 
 
 function handleServer(req, res) {
@@ -33,7 +36,7 @@ function handleServer(req, res) {
     }
 }
 
-http.createServer(handleServer).listen(port, host,);
+http.createServer(handleServer).listen(port, host);
 
 
 
