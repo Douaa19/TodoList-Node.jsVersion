@@ -1,62 +1,109 @@
 const http = require('http');
 const fs = require('fs');
-const path = require('path');
+const route = require('url');
+const pt = require('path');
 const mysql = require('mysql');
 const ejs = require('ejs');
-const route = require('url');
 const getProjects = require('./models/project');
+const port = 8000;
+const host = 'localhost';
 
 
-// getProjects((projects) => {
-//     console.log(projects);
-// });
-
-const hostName = 'localhost';
-const port = 3000;
-
-const server = http.createServer((req, res) => {
-    console.log(req.url, req.method);
-    const pt = route.parse(req.url, true);
-    const query = pt.query;
-    console.log(query);
+function handleServer(req, res) {
+    const path = route.parse(req.url, true);
+    const query = path.query;
+    let page = 'req.url';
 
     res.setHeader('Content-Type', 'text/html');
-    let page= '';
-    switch(req.url) {
-        case '/':
-            page = 'index';
-            getProjects((projects) => {
-                res.writeHead(200 , {'Content-Type' : 'text/html'});
-                let ejsFile = fs.readFileSync(path.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
-                let ejsContent = ejs.render(ejsFile, {projects: projects})
-                res.end(ejsContent);
-            });
-            break;
-        case 'about':
-            page = 'about.ejs';
-            res.statusCode = 200;
-            break;
-        case '/contact':
-            page = 'contact.ejs';
-            res.statusCode = 200;
-            break;
-        // Redirect page
-        case '/about-us':
-            res.statusCode = 301;
-            res.setHeader('Location', '/about');
-            res.end();
-            break;
-        default:
-            page = '404.ejs';
-            res.statusCode = 404;
-            break;
-    }
-    
-});
+    if (req.url === '/') {
 
-server.listen(port, hostName, () => {
-    console.log(`Listening for requests http://${hostName}:${port}`);
-});
+        page = 'index';
+        getProjects((projects) => {
+            res.writeHead(200 , {'Content-Type' : 'text/html'});
+            let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
+            let ejsContent = ejs.render(ejsFile, {projects: projects})
+            res.end(ejsContent);
+        });
+    }else if (path.pathname === '/project') {
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end(`Hello id_project = ${query.id_project}`);
+    }else {
+        res.writeHead(404, {'Content-Type': 'text/plain'});
+        res.end(`Page not found`);
+    }
+}
+
+http.createServer(handleServer).listen(port, host,);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const hostName = 'localhost';
+// const port = 3000;
+
+
+// const server = http.createServer((req, res) => {
+//     console.log(req.url, req.method);
+//     const pt = route.parse(req.url, true);
+//     const query = pt.query;
+//     console.log(query);
+
+
+//     res.setHeader('Content-Type', 'text/html');
+//     let page= '';
+//     switch(req.url) {
+//         case '/':
+//             page = 'index';
+//             getProjects((projects) => {
+//                 res.writeHead(200 , {'Content-Type' : 'text/html'});
+//                 let ejsFile = fs.readFileSync(path.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
+//                 let ejsContent = ejs.render(ejsFile, {projects: projects})
+//                 res.end(ejsContent);
+//             });
+//             break;
+//         case '/project':
+//             break;
+//         case 'about':
+//             page = 'about.ejs';
+//             res.statusCode = 200;
+//             break;
+//         case '/contact':
+//             page = 'contact.ejs';
+//             res.statusCode = 200;
+//             break;
+//         // Redirect page
+//         case '/about-us':
+//             res.statusCode = 301;
+//             res.setHeader('Location', '/about');
+//             res.end();
+//             break;
+//         default:
+//             page = '404.ejs';
+//             res.statusCode = 404;
+//             break;
+//     }
+    
+// });
+
+// server.listen(port, hostName, () => {
+//     console.log(`Listening for requests http://${hostName}:${port}`);
+// });
 
 // Delete one sepecefid row using id
 // con.query(

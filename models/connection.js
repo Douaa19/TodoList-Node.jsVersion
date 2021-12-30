@@ -7,13 +7,14 @@ const con = mysql.createConnection(
         host: 'localhost',
         user: 'root',
         password : '',
-        database : 'todonode'
+        database : 'todonode',
+        multipleStatements: true
     }
 );
 
 con.connect((err) => {
     if(err) throw err;
-    console.log('Connected!');
+    console.log('SQL Connected!');
 });
 
 module.exports = {
