@@ -8,8 +8,9 @@ const getProjects = require('./models/project');
 const getTasks = require('./models/task');
 const port = 8000;
 const host = 'localhost';
+let tasks = [];
 
-console.log(getTasks());
+console.log(getTasks(1, tasks));
 
 
 function handleServer(req, res) {
@@ -28,6 +29,7 @@ function handleServer(req, res) {
             res.end(ejsContent);
         });
     }else if (path.pathname === '/project') {
+        getTasks((tasks), query.id_project)
         res.writeHead(200, {'Content-Type': 'text/plain'});
         res.end(`Hello id_project = ${query.id_project}`);
     }else {
