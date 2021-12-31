@@ -34,6 +34,10 @@ function handleServer(req, res) {
             let ejsContent = ejs.render(ejsFile, {tasks: tasks});
             res.end(ejsContent);
         });
+    }else if(path.pathname === '/') {
+        if (query.id_project) {
+            console.log(query.id_project);
+        }
     }else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
         res.end(`Page not found`);
