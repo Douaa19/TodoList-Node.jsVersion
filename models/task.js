@@ -9,7 +9,7 @@ let getTasks = (id, callback) => {
         let tasks = [];
         res.forEach(row => {
             tasks.push({
-                id: row.id,
+                id_task: row.id_task,
                 id_project: row.id_project,
                 name: row.name,
                 description: row.description

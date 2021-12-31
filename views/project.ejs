@@ -37,6 +37,7 @@
                         <th scope="col">Description</th>
                         <th scope="col">Id_task</th>
                         <th scope="col">Id_project</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,8 +45,22 @@
                     <tr>
                         <td><%= task.name %></td>
                         <td><%= task.description %></td>
-                        <td><%= task.id %></td>
+                        <td><%= task.id_task %></td>
                         <td><%= task.id_project %></td>
+                        <td>
+                            <form action="" method="get">
+                                <input type="hidden" name="id_task" id="id_task" value=<%= task.id_task %>>
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            </form>
+                            <form action="" method="get">
+                                <input type="hidden" name="id_task" id="id_task" value=<%= task.id_task %>>
+                                <button type="submit" class="btn btn-outline-success">Edit</button>
+                            </form>
+                            <form action="http://localhost:8000/project" method="get">
+                                <input type="hidden" name="id_task" id="id_task" value=<%= task.id_task %>>
+                                <button type="submit" class="btn btn-outline-primary">Show</button>
+                            </form>
+                        </td>
                     </tr>
                 <% } %>
                 </tbody>

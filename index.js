@@ -8,7 +8,6 @@ const getProjects = require('./models/project');
 const getTasks = require('./models/task');
 const port = 8000;
 const host = 'localhost';
-let tasks = [];
 
 
 
@@ -29,7 +28,6 @@ function handleServer(req, res) {
         });
     }else if (path.pathname === '/project') {
         page = 'project';
-        console.log(page);
         getTasks(query.id_project, (tasks) => {
             res.writeHead(200 , {'Content-Type' : 'text/html'});
             let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
