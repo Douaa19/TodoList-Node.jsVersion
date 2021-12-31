@@ -31,16 +31,10 @@ function handleServer(req, res) {
         page = 'project';
         console.log(page);
         getTasks(query.id_project, (tasks) => {
-            // res.writeHead(200 , {'Content-Type' : 'text/html'});
-            // let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
-            // let ejsContent = ejs.render(ejsFile, {tasks: tasks});
-            // res.end(ejsContent);
-            tasks.forEach(task => {
-                console.log(task.name);
-                console.log(task.description);
-                console.log(task.id);
-                console.log(`id_project is : ${task.id_project}`);
-            });
+            res.writeHead(200 , {'Content-Type' : 'text/html'});
+            let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
+            let ejsContent = ejs.render(ejsFile, {tasks: tasks});
+            res.end(ejsContent);
         });
     }else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
