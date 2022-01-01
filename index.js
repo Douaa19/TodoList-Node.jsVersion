@@ -6,6 +6,7 @@ const mysql = require('mysql');
 const ejs = require('ejs');
 const getProjects = require('./models/project');
 const getTasks = require('./models/task');
+const { deleteTask } = require('./models/task');
 const port = 8000;
 const host = 'localhost';
 
@@ -28,16 +29,15 @@ function handleServer(req, res) {
         });
     }else if (path.pathname === '/project') {
         page = 'project';
-        getTasks(query.id_project, (tasks) => {
+        getTasks.getTasks(query.id_project, (tasks) => {
             res.writeHead(200 , {'Content-Type' : 'text/html'});
             let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
             let ejsContent = ejs.render(ejsFile, {tasks: tasks});
             res.end(ejsContent);
         });
-    }else if(path.pathname === '/') {
-        if (query.id_project) {
-            console.log(query.id_project);
-        }
+    }else if(path.pathname === '/deleteTask') {
+        page = 'deleteTask';
+        console.log(query);
     }else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
         res.end(`Page not found`);

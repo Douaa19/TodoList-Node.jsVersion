@@ -19,4 +19,14 @@ let getTasks = (id, callback) => {
     });
 }
 
-module.exports = getTasks;
+let deleteTask = (id) => {
+    con.query(`DELETE FROM tasks WHERE id_task= ${id}`, function(err, res) {
+        if(err) throw err;
+        return console.log(`${id}`);
+    });
+}
+
+module.exports = {
+    getTasks: getTasks,
+    deleteTask: deleteTask
+};
