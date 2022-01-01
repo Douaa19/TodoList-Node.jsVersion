@@ -36,8 +36,8 @@ function handleServer(req, res) {
             res.end(ejsContent);
         });
     }else if(path.pathname === '/deleteTask') {
-        page = 'deleteTask';
-        console.log(query);
+        page = 'project';
+        deleteTask(query.id_task);
     }else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
         res.end(`Page not found`);

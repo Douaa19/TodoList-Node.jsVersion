@@ -22,7 +22,7 @@ let getTasks = (id, callback) => {
 let deleteTask = (id) => {
     con.query(`DELETE FROM tasks WHERE id_task= ${id}`, function(err, res) {
         if(err) throw err;
-        return console.log(`${id}`);
+        
     });
 }
 
