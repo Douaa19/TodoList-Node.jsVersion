@@ -19,4 +19,13 @@ let getProjects = (callback) => {
     
 }
 
-module.exports = getProjects;
+let deleteProject = (id) => {
+    con.query(`DELETE FROM projects WHERE id_project = ${id}`, function(err, res) {
+        if(err) throw err;
+    });
+}
+
+module.exports = {
+    getProjects: getProjects,
+    deleteProject: deleteProject
+};

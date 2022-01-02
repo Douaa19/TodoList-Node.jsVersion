@@ -61,7 +61,7 @@
                         <td><%= project.title %></td>
                         <td><%= project.description %></td>
                         <td>
-                            <form action="" method="get">
+                            <form action="http://localhost:8000/deleteProject" method="get">
                                 <input type="hidden" name="id_project" id="id_project" value=<%= project.id_project %>>
                                 <button type="submit" class="btn btn-outline-danger">Delete</button>
                             </form>

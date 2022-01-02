@@ -4,10 +4,8 @@ const route = require('url');
 const pt = require('path');
 const mysql = require('mysql');
 const ejs = require('ejs');
-const getProjects = require('./models/project');
-const getTasks = require('./models/task');
-const { deleteTask } = require('./models/task');
-const { hostname } = require('os');
+const projects = require('./models/project');
+const tasks = require('./models/task');
 const port = 8000;
 const host = 'localhost';
 
@@ -22,7 +20,7 @@ function handleServer(req, res) {
     if (req.url === '/') {
 
         page = 'index';
-        getProjects((projects) => {
+        projects.getProjects((projects) => {
             res.writeHead(200 , {'Content-Type' : 'text/html'});
             let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
             let ejsContent = ejs.render(ejsFile, {projects: projects})
@@ -30,27 +28,32 @@ function handleServer(req, res) {
         });
     }else if (path.pathname === '/project') {
         page = 'project';
-        getTasks.getTasks(query.id_project, (tasks) => {
+        tasks.getTasks(query.id_project, (tasks) => {
             res.writeHead(200 , {'Content-Type' : 'text/html'});
             let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
             let ejsContent = ejs.render(ejsFile, {tasks: tasks});
             res.end(ejsContent);
-            path.path = '';
-            console.log(path.path);
         });
     }else if(path.pathname === '/deleteTask') {
         // Delete fuction for task
         page = 'project';
-        deleteTask(query.id_task);
+        tasks.deleteTask(query.id_task);
         // Retourn to project page with new data
-        getTasks.getTasks(query.id_project, (tasks) => {
+        tasks.getTasks(query.id_project, (tasks) => {
             res.writeHead(200 , {'Content-Type' : 'text/html'});
             let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
             let ejsContent = ejs.render(ejsFile, {tasks: tasks});
             res.end(ejsContent);
         });
-    }else if(path.pathname === '/addTask') {
-        console.log(path.pathname);
+    }else if(path.pathname === '/deleteProject') {
+        page = 'index';
+        projects.deleteProject(query.id_project);
+        projects.getProjects((projects) => {
+            res.writeHead(200 , {'Content-Type' : 'text/html'});
+            let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
+            let ejsContent = ejs.render(ejsFile, {projects: projects})
+            res.end(ejsContent);
+        });
     }else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
         res.end(`Page not found`);
