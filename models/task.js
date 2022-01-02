@@ -12,6 +12,7 @@ let getTasks = (id, callback) => {
                 id_task: row.id_task,
                 id_project: row.id_project,
                 name: row.name,
+                status: row.status,
                 description: row.description
             });
         });
