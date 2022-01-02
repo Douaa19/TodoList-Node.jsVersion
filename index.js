@@ -4,6 +4,7 @@ const route = require('url');
 const pt = require('path');
 const mysql = require('mysql');
 const ejs = require('ejs');
+const qs = require('querystring');
 const projects = require('./models/project');
 const tasks = require('./models/task');
 const port = 8000;
@@ -51,9 +52,13 @@ function handleServer(req, res) {
         projects.getProjects((projects) => {
             res.writeHead(200 , {'Content-Type' : 'text/html'});
             let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
-            let ejsContent = ejs.render(ejsFile, {projects: projects})
+            let ejsContent = ejs.render(ejsFile, {projects: projects});
             res.end(ejsContent);
         });
+    }else if (path.pathname === '/addProject') {
+        if (req.method == 'POST') {
+            console.log(req);
+        }
     }else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
         res.end(`Page not found`);
