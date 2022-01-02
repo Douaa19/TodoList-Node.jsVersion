@@ -37,7 +37,15 @@ function handleServer(req, res) {
         });
     }else if(path.pathname === '/deleteTask') {
         page = 'project';
+        // console.log(query.id_task);
+        // console.log(query.id_project);
         deleteTask(query.id_task);
+        getTasks.getTasks(query.id_project, (tasks) => {
+            res.writeHead(200 , {'Content-Type' : 'text/html'});
+            let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
+            let ejsContent = ejs.render(ejsFile, {tasks: tasks});
+            res.end(ejsContent);
+        });
     }else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
         res.end(`Page not found`);

@@ -50,6 +50,7 @@
                         <td>
                             <form action="http://localhost:8000/deleteTask" method="get">
                                 <input type="hidden" name="id_task" id="id_task" value=<%= task.id_task %>>
+                                <input type="hidden" name="id_project" id="id_project" value=<%= task.id_project %>>
                                 <button type="submit" class="btn btn-outline-danger">Delete</button>
                             </form>
                             <form action="" method="get">
