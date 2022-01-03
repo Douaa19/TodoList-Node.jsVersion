@@ -69,11 +69,11 @@
                             <form action="http://localhost:8000/deleteTask" method="get">
                                 <input type="hidden" name="id_task" id="id_task" value=<%= task.id_task %>>
                                 <input type="hidden" name="id_project" id="id_project" value=<%= task.id_project %>>
-                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                <button type="submit" class="btn btn-outline-danger">Delete <i class="fa fa-trash"></i></button>
                             </form>
                             <form action="http://localhost:8000/editTask" method="get">
                                 <input type="hidden" name="id_task" id="id_task" value=<%= task.id_task %>>
-                                <button type="submit" class="btn btn-outline-success">Edit</button>
+                                <button type="submit" class="btn btn-outline-success">Edit <i class="fa fa-pencil"></i></button>
                             </form>
                         </td>
                     </tr>

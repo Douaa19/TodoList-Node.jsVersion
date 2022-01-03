@@ -63,11 +63,11 @@
                         <td>
                             <form action="http://localhost:8000/deleteProject" method="get">
                                 <input type="hidden" name="id_project" id="id_project" value=<%= project.id_project %>>
-                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                <button type="submit" class="btn btn-outline-danger">Delete <i class="fa fa-trash"></i></button>
                             </form>
                             <form action="http://localhost:8000/project" method="get">
                                 <input type="hidden" name="id_project" id="id_project" value=<%= project.id_project %>>
-                                <button type="submit" class="btn btn-outline-primary">Show</button>
+                                <button type="submit" class="btn btn-outline-primary">Show <i class="fa fa-eye"></i></button>
                             </form>
                         </td>
                     </tr>
