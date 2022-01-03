@@ -8,6 +8,7 @@ const qs = require('querystring');
 const projects = require('./models/project');
 const tasks = require('./models/task');
 const project = require('./models/project');
+const { url } = require('inspector');
 const port = 8000;
 const host = 'localhost';
 
@@ -79,7 +80,7 @@ function handleServer(req, res) {
                 let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
                 let ejsContent = ejs.render(ejsFile, {projects: projects});
                 res.end(ejsContent);
-            })
+            });
         });
     }else if(path.pathname === '/editTask') {
         page = 'task';
@@ -88,7 +89,20 @@ function handleServer(req, res) {
             let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
             let ejsContent = ejs.render(ejsFile, {myTask: myTask});
             res.end(ejsContent);
-        })
+        });
+    }else if(path.pathname === '/updateTask' && req.method == 'POST'){
+        page = 'project';
+        let inputs = '';
+        req.on('data', data => inputs += data).on('end', () => {
+            let infos = qs.parse(inputs);
+            tasks.updateTask(infos);
+            tasks.getTask(infos.id_task, (tasks) => {
+                res.writeHead(200 , {'Content-Type' : 'text/html'});
+                let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
+                let ejsContent = ejs.render(ejsFile, {tasks: tasks});
+                res.end(ejsContent);
+            });
+        });
     }else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
         res.end(`Page not found`);

@@ -47,12 +47,22 @@ let getTask = (id, callback) => {
             });
         });
         callback(myTask);
-    })
+    });
+}
+
+let updateTask = (infos) => {
+    con.query(
+        `UPDATE tasks SET name = '${infos.name}',description = '${infos.description}',status = '${infos.status}' WHERE id_task = ${infos.id_task} ; `,
+        (err, res) => {
+            if(err) throw err;
+        }
+    );
 }
 
 module.exports = {
     getTasks: getTasks,
     deleteTask: deleteTask,
     addTask: addTask,
-    getTask: getTask
+    getTask: getTask,
+    updateTask: updateTask
 };
