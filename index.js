@@ -30,7 +30,6 @@ function handleServer(req, res) {
         });
     }else if (path.pathname === '/project') {
         page = 'project';
-        // console.log(query.id_project);
         tasks.getTasks(query.id_project, (tasks) => {
             res.writeHead(200 , {'Content-Type' : 'text/html'});
             let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
@@ -82,6 +81,14 @@ function handleServer(req, res) {
                 res.end(ejsContent);
             })
         });
+    }else if(path.pathname === '/editTask') {
+        page = 'task';
+        tasks.getTask(query.id_task, (myTask) => {
+            res.writeHead(200 , {'Content-Type' : 'text/html'});
+            let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
+            let ejsContent = ejs.render(ejsFile, {myTask: myTask});
+            res.end(ejsContent);
+        })
     }else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
         res.end(`Page not found`);

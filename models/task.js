@@ -33,8 +33,26 @@ let addTask = (infos) => {
     });
 }
 
+let getTask = (id, callback) => {
+    con.query(`SELECT * FROM tasks WHERE id_task = ${id}`, (err, res) => {
+        if(err) throw err;
+        let myTask = [];
+        res.forEach(row => {
+            myTask.push({
+                id_task: row.id_task,
+                id_project: row.id_project,
+                name: row.name,
+                description: row.description,
+                status: row.status
+            });
+        });
+        callback(myTask);
+    })
+}
+
 module.exports = {
     getTasks: getTasks,
     deleteTask: deleteTask,
-    addTask: addTask
+    addTask: addTask,
+    getTask: getTask
 };

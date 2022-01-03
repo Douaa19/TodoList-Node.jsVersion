@@ -35,45 +35,17 @@
                 <h3>Add project  <i class="fa fa-plus-square"></i></h3>
                 <div class="form-group">
                     <label for="projectTitle">Title</label>
-                    <input type="text" class="form-control" id="projectTitle" placeholder="Title project" name="title">
+                    <input type="text" class="form-control" id="projectTitle" name="title" placeholder=<%= myTask[0].name %>>
                 </div>
                 <div class="form-group">
                     <label for="projectDescription">Description</label>
-                    <textarea class="form-control" id="projectDescription" placeholder="Description project" rows="3" name="description"></textarea>
+                    <textarea class="form-control" id="projectDescription" rows="3" name="description" placeholder=<%= myTask[0].description %>></textarea>
                 </div>
+                <input type="text" name="id_task" id="id_task" value="<%= myTask[0].id_task %>">
                 <div class="form-group mt-1">
-                    <button type="submit" class="btn btn-outline-primary">Add Project</button>
+                    <button type="submit" class="btn btn-outline-primary">Update Task</button>
                 </div>
             </form>
-
-            <table class="table mt-4">
-                <h3>All projects</h3>
-                <thead class="bg-black text-light">
-                    <tr>
-                        <th scope="col">Project title</th>
-                        <th scope="col">Project description</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <% for(let project of projects) { %>
-                    <tr>
-                        <td><%= project.title %></td>
-                        <td><%= project.description %></td>
-                        <td>
-                            <form action="http://localhost:8000/deleteProject" method="get">
-                                <input type="hidden" name="id_project" id="id_project" value=<%= project.id_project %>>
-                                <button type="submit" class="btn btn-outline-danger">Delete</button>
-                            </form>
-                            <form action="http://localhost:8000/project" method="get">
-                                <input type="hidden" name="id_project" id="id_project" value=<%= project.id_project %>>
-                                <button type="submit" class="btn btn-outline-primary">Show</button>
-                            </form>
-                        </td>
-                    </tr>
-                <% } %>
-                </tbody>
-            </table>
         </div>
     </main>
 

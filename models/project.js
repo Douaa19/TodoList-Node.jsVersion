@@ -16,7 +16,6 @@ let getProjects = (callback) => {
         });
         callback(projects);
     });
-    
 }
 
 let deleteProject = (id) => {
