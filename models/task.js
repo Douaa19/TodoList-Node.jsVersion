@@ -4,6 +4,7 @@ const {con} = require('./connection');
 
 
 let getTasks = (id, callback) => {
+    // console.log(id);
     con.query(`SELECT * FROM tasks WHERE id_project= ${id}`, function(err, res) {
         if(err) throw err;
         let tasks = [];

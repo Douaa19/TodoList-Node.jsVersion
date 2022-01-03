@@ -29,7 +29,7 @@
     
     <main>
         <div class="container">
-            <h3 class="text-danger">Tasks of "Project name"</h3>
+            <h3 class="text-danger">Tasks of project <%= tasks[0].id_project %></h3>
             <form class="mt-3" method="POST" action="http://localhost:8000/addTask">
                 <h3>Add task  <i class="fa fa-plus"></i></h3>
                 <div class="form-group">
@@ -44,9 +44,7 @@
                     <label for="status_task">Status</label>
                     <input type="text" class="form-control" id="status_task" placeholder="Status" name="status">
                 </div>
-                <% for(let task of tasks) { %>
-                <input type="hidden" name="id_project" id="id_project" value=<%= task.id_project %>>
-                <% } %>
+                <input type="hidden" name="id_project" id="id_project" value=<%= tasks[0].id_project %>>
                 <div class="form-group mt-1">
                     <button type="submit" class="btn btn-outline-primary">Add Task</button>
                 </div>

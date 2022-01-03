@@ -25,7 +25,17 @@ let deleteProject = (id) => {
     });
 }
 
+let addProject = (infos) => {
+    con.query("INSERT INTO projects SET ?", infos, (err, res) => {
+        if(err) throw err;
+        else{
+            console.log('Data stored');
+        }
+    })
+}
+
 module.exports = {
     getProjects: getProjects,
-    deleteProject: deleteProject
+    deleteProject: deleteProject,
+    addProject: addProject
 };
