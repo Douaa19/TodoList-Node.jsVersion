@@ -26,7 +26,14 @@ let deleteTask = (id) => {
     });
 }
 
+let addTask = (infos) => {
+    con.query(`INSERT INTO tasks SET ?`, infos, (err, res) => {
+        if(err) throw err;
+    });
+}
+
 module.exports = {
     getTasks: getTasks,
-    deleteTask: deleteTask
+    deleteTask: deleteTask,
+    addTask: addTask
 };

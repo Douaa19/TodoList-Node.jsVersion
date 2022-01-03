@@ -56,9 +56,25 @@ function handleServer(req, res) {
             res.end(ejsContent);
         });
     }else if (path.pathname === '/addProject') {
-        if (req.method == 'POST') {
-            console.log(req);
-        }
+        console.log(path.pathname);
+        // if (req.method == 'GET') {
+        //     console.log(req.url);
+        //     console.log(req.method);
+        //     console.log(query);
+        // }
+    }else if (path.pathname === '/addTask' && req.method == 'POST') {
+        page = 'project'
+        let rawData = '';
+        req.on('data', data=> rawData += data).on('end', () => {
+            let infos = qs.parse(rawData);
+            console.log(infos);
+            // tasks.getTasks(infos.id_project, (tasks) => {
+            //     res.writeHead(200 , {'Content-Type' : 'text/html'});
+            //     let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
+            //     let ejsContent = ejs.render(ejsFile, {tasks: tasks});
+            //     res.end(ejsContent);
+            // });
+        });
     }else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
         res.end(`Page not found`);
