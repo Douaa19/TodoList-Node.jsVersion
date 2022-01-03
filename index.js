@@ -95,6 +95,7 @@ function handleServer(req, res) {
         let inputs = '';
         req.on('data', data => inputs += data).on('end', () => {
             let infos = qs.parse(inputs);
+            console.log(inputs);
             tasks.updateTask(infos);
             tasks.getTask(infos.id_task, (tasks) => {
                 res.writeHead(200 , {'Content-Type' : 'text/html'});
