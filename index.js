@@ -7,6 +7,7 @@ const ejs = require('ejs');
 const qs = require('querystring');
 const projects = require('./models/project');
 const tasks = require('./models/task');
+const project = require('./models/project');
 const port = 8000;
 const host = 'localhost';
 
@@ -56,13 +57,6 @@ function handleServer(req, res) {
             let ejsContent = ejs.render(ejsFile, {projects: projects});
             res.end(ejsContent);
         });
-    }else if (path.pathname === '/addProject') {
-        console.log(path.pathname);
-        // if (req.method == 'GET') {
-        //     console.log(req.url);
-        //     console.log(req.method);
-        //     console.log(query);
-        // }
     }else if (path.pathname === '/addTask' && req.method == 'POST') {
         page = 'project'
         let rawData = '';
@@ -75,6 +69,18 @@ function handleServer(req, res) {
                 let ejsContent = ejs.render(ejsFile, {tasks: tasks});
                 res.end(ejsContent);
             });
+        });
+    }else if(path.pathname === '/addProject' && req.method == 'POST') {
+        page = 'index';
+        let inputs = '';
+        req.on('data', data => inputs += data).on('end', () => {
+            let infos = qs.parse(inputs);
+            project.addProject(infos);
+            project.getProjects((projects) => {
+                let ejsFile = fs.readFileSync(pt.join(__dirname, 'views', `${page}.ejs`) , 'utf-8');
+                let ejsContent = ejs.render(ejsFile, {projects: projects});
+                res.end(ejsContent);
+            })
         });
     }else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
